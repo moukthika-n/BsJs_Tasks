@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-7</title>
+</head>
+
+<body style="margin:50px">
+    <p>
+        Write a JavaScript function that reverse a number. <br>
+        Example x = 32243; <br>
+        Expected Output : 34223
+    </p>
+    <label for="demo">Enter a number: </label>
+    <input type="text" id="demo">
+    <button onclick="reverseAndDisplay()">Reverse</button>
+    <p id="ReverseNumber"></p>
+
+    <script>
+        function reverse(demo) {
+            var x, y, z, temp = 0;
+
+            y = Number(document.getElementById("demo").value);
+
+            z = y;
+            while (y > 0) {
+                x = y % 10;
+                y = parseInt(y / 10);
+                temp = temp * 10 + x;
+            }
+            return temp;
+        }
+        function reverseAndDisplay() {
+            const inputElement = document.getElementById('demo');
+            const reverseNumberElement = document.getElementById('ReverseNumber');
+            const inputValue = inputElement.value.trim();
+
+            if (inputValue) {
+                const Value = reverse(inputValue);
+                reverseNumberElement.textContent = `Reverse Number: ${Value}`;
+            } else {
+                reverseNubmerElement.textContent = 'Please enter a valid Number.';
+            }
+        }
+    </script>
+</body>
+
+
+
+</html>

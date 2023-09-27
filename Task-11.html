@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-11</title>
+    <style>
+        .error {
+            color: rgba(255, 0, 0, 0.947);
+        }
+
+        th {
+            text-align: right;
+            padding: 10px;
+            font-weight: normal;
+        }
+
+        input,
+        textarea {
+            padding: 3px;
+        }
+
+        input.error-input,
+        textarea.error-input {
+            border: 2px solid red;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 4px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table>
+            <form id="myForm">
+                <tr>
+                    <th><label for="name">Name:</label></th>
+                    <td><input type="text" id="name" name="name">&nbsp;&nbsp;
+                        <span id="nameError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="email">Email:</label></th>
+                    <td><input type="email" id="email" name="email">&nbsp;&nbsp;
+                        <span id="emailError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="website">Website:</label></th>
+                    <td><input type="url" id="website" name="website">&nbsp;&nbsp;
+                        <span id="websiteError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="message">Message:</label></th>
+                    <td><textarea id="message" name="message" rows="4" cols="20"></textarea>&nbsp;&nbsp;
+                        <span id="messageError" class="error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit">Submit</button></td>
+                </tr>
+            </form>
+        </table>
+    </center>
+
+    <script>
+        const form = document.getElementById('myForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const websiteInput = document.getElementById('website');
+        const messageInput = document.getElementById('message');
+
+        form.addEventListener('submit', function (e) {
+            let isValid = true;
+
+            document.querySelectorAll('.error').forEach(error => {
+                error.textContent = '';
+            });
+            document.querySelectorAll('.error-input').forEach(input => {
+                input.classList.remove('error-input');
+            });
+
+            if (!nameInput.value.trim()) {
+                document.getElementById('nameError').textContent = 'This field is required';
+                nameInput.classList.add('error-input');
+                isValid = false;
+            }
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(emailInput.value.trim())) {
+                document.getElementById('emailError').textContent = 'A valid email address is required';
+                emailInput.classList.add('error-input');
+                isValid = false;
+            }
+
+            const websitePattern = /^(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!websiteInput.value.trim() || !websitePattern.test(websiteInput.value.trim())) {
+                document.getElementById('websiteError').textContent = 'A valid URL is required';
+                websiteInput.classList.add('error-input');
+                isValid = false;
+            }
+
+            if (!messageInput.value.trim()) {
+                document.getElementById('messageError').textContent = 'This field is required';
+                messageInput.classList.add('error-input');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function () {
+                this.classList.remove('error-input');
+            });
+        });
+    </script>
+</body>
+
+</html>

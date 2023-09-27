@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-8</title>
+</head>
+
+<body style="margin: 50px">
+    <p>
+        Write a JavaScript function that returns a passed string with letters in
+        alphabetical order.<br>
+        Example string : 'webmaster’<br>
+        Expected Output : 'abeemrstw'
+    </p>
+    <label for="inputString">Enter a string: </label>
+    <input type="text" id="inputString">
+    <button onclick="sortAndDisplay()">Sort</button>
+    <p id="sortedResult"></p>
+
+    <script>
+        function sortedString(inputString) {
+            const sortedString = inputString.split('').sort().join('');
+            return sortedString;
+        }
+
+        function sortAndDisplay() {
+            const inputStringElement = document.getElementById('inputString');
+            const sortedResultElement = document.getElementById('sortedResult');
+            const inputValue = inputStringElement.value.trim();
+
+            if (inputValue) {
+                const sortedValue = sortedString(inputValue);
+                sortedResultElement.textContent = `Sorted String: ${sortedValue}`;
+            } else {
+                sortedResultElement.textContent = 'Please enter a valid string.';
+            }
+        }
+    </script>
+</body>
+
+</html>

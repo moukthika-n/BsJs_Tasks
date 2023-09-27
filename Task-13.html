@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-13</title>
+    <style>
+        #animation-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #moving-image {
+            position: relative;
+            left: 0;
+            animation: moveImage 5s linear infinite;
+            animation-play-state: paused;
+        }
+
+        #animation-heading {
+            color: #211f7d;
+            text-align: center;
+        }
+
+        button {
+            padding: 3px 10px;
+            position: relative;
+            margin-left: 10px;
+        }
+
+        @keyframes moveImage {
+            0% {
+                left: 0;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="animation-container">
+        <img id="moving-image" src="image4.jpg" alt="Moving Image">
+    </div>
+    <h1 id="animation-heading">Click the following buttons to handle animation</h1>
+    <center>
+        <button id="start-button">Start</button>
+        <button id="stop-button">Stop</button>
+    </center>
+    <script>
+        const movingImage = document.getElementById('moving-image');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+
+        startButton.addEventListener('click', () => {
+            movingImage.style.animationPlayState = 'running';
+        });
+
+        stopButton.addEventListener('click', () => {
+            movingImage.style.animationPlayState = 'paused';
+        });
+    </script>
+</body>
+
+</html>

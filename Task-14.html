@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-14</title>
+    <style>
+
+        .box {
+            padding: 20px;
+            margin: 20px;
+            width: 50%;
+            background: linear-gradient(to bottom, #ffff99 0%, #ff99cc 80%)
+        }
+
+        th{
+            width: 20%;
+            text-align: right;
+            padding: 10px;
+        }
+
+        input[type="submit"]{
+            border: 2px solid #000;
+            border-radius: 15px;
+            background-color: red;
+            color: aliceblue;
+            padding: 3px 17px;
+            text-decoration: underline;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="age"],
+        input[type="tel"],
+        textarea {
+            width: 60%; 
+        }
+
+    </style>
+</head>
+<body>
+    <center>
+    <div class="box">
+        <form>  
+            <h1 style="color: blue;">Registration form</h1>  
+            <table>
+                <tr>
+                    <th><label for="fname">First Name</label></th>
+                    <td><input type="text" id="fname" name="fname"></td>
+                </tr>
+                <tr>
+                    <th><label for="lname">Last Name</label></th>
+                    <td><input type="text" id="lname" name="lname"></td>
+                </tr>
+                <tr>
+                    <th><label for="email">Email</label></th>
+                    <td><input type="email" id="email" name="email"></td>
+                </tr>
+                <tr>
+                    <th><label for="pwd">Password</label></th>
+                    <td><input type="password" id="pwd" name="pwd"></td>
+                </tr>
+                <tr>
+                    <th><label for="repwd">Re-enter Password</label></th>
+                    <td><input type="password" id="repwd" name="repwd"></td>
+                </tr>
+                <tr>
+                    <th rowspan="2"><label for="gender">Gender</label></th>
+                    <td><input type="radio" name="gender" id="gender" checked>
+                        <label for="male">Male</label></td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="gender" id="gender">
+                        <label for="female">Female</label></td>
+                </tr>
+                <tr>
+                    <th><label for="age">Age</label></th>
+                    <td><input type="age" id="age" name="age"></td>
+                </tr>
+                <tr>
+                    <th><label for="phone">Phone Number</label></th>
+                    <td><input type="tel" name="phone" id="phone"></td>
+                </tr>
+                <tr>
+                    <th><label for="address">Address</label></th>
+                    <td><textarea name="address" id="address" style="height: 100px;"></textarea></td>
+                </tr>
+                <tr>
+                    <th><label for="state">State</label></th>
+                    <td><input type="text" name="state" id="state"></td>
+                </tr>
+                <tr>
+                    <th><label for="country">Country</label></th>
+                    <td><select name="country" id="country">
+                        <option value="" disabled selected>Choose your country</option>
+                        <option value="india">India</option>
+                        <option value="pakisthan">Pakisthan</option>
+                        <option value="lanka">Sri Lanka</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <th><label for="lang">Languages Known</label></th>
+                    <td><input type="checkbox" name="lang1" value="lang1">
+                        <label for="lang1">English</label>
+                
+                        <input type="checkbox" name="lang2" value="lang2">
+                        <label for="lang2">Kannada</label>
+                
+                        <input type="checkbox" name="lang3" value="lang3">
+                        <label for="lang3">Hindi</label>
+                    
+                        <input type="checkbox" name="lang4" value="lang4">
+                        <label for="lang4">Telugu</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="checkbox" name="para" value="para" checked>
+                        <label for="para">Hereby I declare all the given details are true</label></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;">Log in to <a href="link">Ethnus</a> website</td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="REGISTER">
+        </form>
+    </div>
+</center>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const passwordInput = document.getElementById("pwd");
+            const rePasswordInput = document.getElementById("repwd");
+            const submitButton = document.querySelector('input[type="submit"]');
+    
+            function displayError(inputElement, message) {
+                removeErrorMessages(inputElement);
+    
+                const errorMessage = document.createElement("span");
+                errorMessage.textContent = message;
+                errorMessage.style.color = "red";
+                errorMessage.classList.add("error");
+                errorMessage.style.paddingLeft = "20px";
+                inputElement.parentNode.appendChild(errorMessage);
+            }
+    
+            function removeErrorMessages(inputElement) {
+                const errorMessages = inputElement.parentNode.querySelectorAll("span.error");
+                errorMessages.forEach((errorMessage) => {
+                    errorMessage.remove();
+                });
+            }
+
+            form.addEventListener("submit", function (e) {
+                const allInputElements = form.querySelectorAll("input");
+                allInputElements.forEach((inputElement) => {
+                    removeErrorMessages(inputElement);
+                });
+    
+                let valid = true;
+    
+                const firstNameInput = document.getElementById("fname");
+                if (firstNameInput.value.trim().length < 5) {
+                    displayError(firstNameInput, "POOR");
+                    valid = false;
+                }
+    
+                const lastNameInput = document.getElementById("lname");
+                if (lastNameInput.value.trim().length < 5) {
+                    displayError(lastNameInput, "POOR");
+                    valid = false;
+                }
+    
+                const emailInput = document.getElementById("email");
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput.value.trim())) {
+                    displayError(emailInput, "POOR");
+                    valid = false;
+                }
+    
+                if (passwordInput.value.trim().length < 5) {
+                    displayError(passwordInput, "POOR");
+                    valid = false;
+                }
+    
+                if (rePasswordInput.value.trim() === "" || rePasswordInput.value !== passwordInput.value) {
+                    displayError(rePasswordInput, "POOR/MISMATCH");
+                    valid = false;
+                }
+    
+                const ageInput = document.getElementById("age");
+                const ageValue = parseInt(ageInput.value, 10);
+                if (isNaN(ageValue) || ageValue < 18) {
+                    displayError(ageInput, "POOR");
+                    valid = false;
+                }
+    
+                const phoneInput = document.getElementById("phone");
+                const phonePattern = /^\d{10}$/;
+                if (!phonePattern.test(phoneInput.value.trim())) {
+                    displayError(phoneInput, "POOR");
+                    valid = false;
+                }
+    
+                const addressInput = document.getElementById("address");
+                if (addressInput.value.trim().length < 5) {
+                    displayError(addressInput, "POOR");
+                    valid = false;
+                }
+    
+                const stateInput = document.getElementById("state");
+                if (stateInput.value.trim().length < 5) {
+                    displayError(stateInput, "POOR");
+                    valid = false;
+                }
+    
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+        
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-10</title>
+    <style>
+        button {
+            margin: 10px;
+        }
+
+        .date-display {
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="showDate()">show Date</button>
+    <div class="date-display" id="date"></div>
+
+    <button onclick="showTime()">show Time</button>
+    <div class="date-display" id="time"></div>
+
+    <script>
+        function showDate() {
+            var today = new Date();
+            var dateString = today.getDate() + "/" + today.toLocaleString("default", { month: "long" }) + "/" + today.getFullYear();
+            document.getElementById("date").innerHTML = dateString;
+        }
+        function showTime() {
+            const d = new Date();
+            document.getElementById("time").innerHTML = d;
+        }
+    </script>
+</body>
+
+</html>
